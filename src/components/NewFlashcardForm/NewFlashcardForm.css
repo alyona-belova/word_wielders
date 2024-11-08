@@ -1,0 +1,23 @@
+.new-flashcard-form {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.new-flashcard-form input {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.new-flashcard-form button {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #3fc09e;
+    color: white;
+    border: none;
+    text-align: center;
+}
+
+.new-flashcard-form button:hover {
+    background-color: #329f82;
+}
