@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Flashcard.css';
 
-function Flashcard({ id, frontText, backText, onDeleteFlashcard }) {
+function Flashcard({ id, frontText, backText, category, onDeleteFlashcard }) {
     const [isFlipped, setIsFlipped] = useState(false);
     const handleFlip = () => { setIsFlipped(!isFlipped); };
 
@@ -10,6 +10,7 @@ function Flashcard({ id, frontText, backText, onDeleteFlashcard }) {
             <div className="flashcard-inner">
                 <div className="flashcard front">
                     <p>{frontText}</p>
+                    <p>{category}</p>
                     <button className='delete-button' onClick={(e) => {
                         e.stopPropagation();
                         onDeleteFlashcard(id)

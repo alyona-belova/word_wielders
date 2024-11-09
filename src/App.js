@@ -8,10 +8,17 @@ function App() {
         const savedFlashcards = localStorage.getItem('flashcards');
         return savedFlashcards ? JSON.parse(savedFlashcards) : [];
     });
+    const [categories, setCategories] = useState(() => {
+        const savedCategories = localStorage.getItem('categories');
+        return savedCategories ? JSON.parse(savedCategories) : ['All'];
+    });
 
     useEffect(() => {
         localStorage.setItem('flashcards', JSON.stringify(flashcards));
     }, [flashcards]);
+    useEffect(() => {
+        localStorage.setItem('categories', JSON.stringify(categories));
+    }, [categories]);
 
     const addFlashcard = (newFlashcard) => {
         setFlashcards([
@@ -23,14 +30,20 @@ function App() {
         setFlashcards(flashcards.filter((card) => card.id !== id));
     };
 
+    const addCategory = (newCategory) => {
+        setCategories([...categories, newCategory]);
+    };
+
     return (
         <div className="App">
             <h1>Word Wielders</h1>
             <NewFlashcardForm
-                onAddFlashcard={addFlashcard} />
+                onAddFlashcard={addFlashcard}
+                onAddCategory={addCategory} />
             <FlashcardList
                 flashcards={flashcards}
-                onDeleteFlashcard={deleteFlashcard} />
+                onDeleteFlashcard={deleteFlashcard}
+                categories={categories} />
         </div>
     );
 }

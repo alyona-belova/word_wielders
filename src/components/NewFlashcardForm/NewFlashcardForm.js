@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import './NewFlashcardForm.css';
 
-function NewFlashcardForm({ onAddFlashcard }) {
+function NewFlashcardForm({ onAddFlashcard, onAddCategory }) {
     const [frontText, setFrontText] = useState('');
     const [backText, setBackText] = useState('');
+    const [category, setCategory] = useState('');
 
     const handleSubmitCard = (e) => {
         e.preventDefault();
         if (frontText.trim() && backText.trim()) {
-            onAddFlashcard({ frontText, backText });
+            onAddFlashcard({ frontText, backText, category });
             setFrontText('');
             setBackText('');
+            setCategory('');
         }
+    }
 
+    const handleAddCategory = (e) => {
+        e.preventDefault();
+        if (category.trim()) {
+            onAddCategory(category);
+            setCategory(category);
+        }
     }
 
     return (
@@ -31,6 +40,14 @@ function NewFlashcardForm({ onAddFlashcard }) {
                 onChange={(e) => setBackText(e.target.value)}
                 required
             />
+            <input
+                type="text"
+                placeholder="Category"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+            />
+            <button onClick={handleAddCategory}>Add category</button>
             <button type="submit">Add card</button>
         </form>
     );
